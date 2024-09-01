@@ -1,10 +1,10 @@
 <div class="page-signup">
   <div class="container-signup">
-    <div class="login-logo">
+    <div class="signup-header">
       <h2 class="h2-signup">Sign Up</h2>
       <div class="logo-app-name">
         <img class="logo" src=".\images\tuparking-logo.svg" alt="logo">
-        <p class="p-app-name">TUPparking Management</p>
+        <p class="p-app-name">TUParking Management</p>
       </div>
     </div>
     <form class="form-signup">
@@ -28,7 +28,7 @@
         <label class="label-signup">Confirm Password</label>
         <input class="input-signup" type="password" placeholder="********">
       </div>
-        <button class="btn-signup">Sign Up</button>
+        <button [routerLink]="['/login']" class="btn-signup">Sign Up</button>
     </form>
     <div class="container-login">
       <p class="p-login">Already have an account?</p>

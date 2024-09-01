@@ -20,7 +20,7 @@ padding: 25px;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.login-logo{
+.signup-header{
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -120,19 +120,17 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   position: relative;
   color: #c2c5e1;
   text-decoration: none;
-}
-
-.a-login::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 20px;
-  width: 100%;
-  height: 2px;
-  background-color: #f1f1f161;
-  transition: width 0.25s ease;
-}
-
-.a-login:hover::after {
-  width: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 100%;
+    height: 2px;
+    background-color: #f1f1f161;
+    transition: width 0.25s ease;
+  }
+  &:hover::after {
+    width: 0;
+  }
 }

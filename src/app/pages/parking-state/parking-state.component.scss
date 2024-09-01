@@ -1,0 +1,49 @@
+.page-parking-state{
+  height: 100vh;
+  background: radial-gradient(circle, #0a192f, #020c1b 60%);
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 20px;
+}
+
+.h2-app{
+  width: 25%;
+  text-align: end;
+  font-size: 3rem;
+  position: relative;
+  color: #f1f1f1;
+  text-decoration: none;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 55px;
+    width: 100%;
+    height: 5px;
+    background-color: #f1f1f1;
+  }
+}
+
+nav{
+  display: flex;
+  width: 15%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;  
+}
+
+.page-name{
+  color: #f1f1f1;
+  font-size: 1.25rem; 
+}
+
+.profile-pic{
+  background-color: aliceblue;
+  border-radius: 55%;
+  width: 30px;
+}
