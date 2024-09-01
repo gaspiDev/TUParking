@@ -1,0 +1,26 @@
+<div class="page-signin">
+  <div class="container-signin">
+    <div class="login-logo">
+      <h2 class="h2-signin">Log In</h2>
+      <div class="logo-app-name">
+        <img class="logo" src=".\images\tuparking-logo.svg" alt="logo">
+        <p class="p-app-name">TUPparking Management</p>
+      </div>
+    </div>
+    <form class="form-signin">
+      <div class="input-field">
+        <label class="label-signin">Username</label>
+        <input class="input-signin" type="text" placeholder="employe1234">
+      </div>
+      <div class="input-field">
+        <label class="label-signin">Password</label>
+        <input id="input-password" class="input-signin" type="password" placeholder="********">
+      </div>
+        <button class="btn-signin">Log In</button>
+    </form>
+    <div class="container-signup">
+      <p class="p-signup">Dont't have an account?</p>
+      <a class="a-signup" [routerLink]="['/signup']">Sign Up</a>
+    </div>
+  </div>
+</div>

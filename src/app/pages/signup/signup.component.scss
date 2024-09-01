@@ -1,0 +1,138 @@
+.page-signup{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #0a192f, #020c1b 90%);
+}
+
+.container-signup{
+height: 80%;
+width: 30%;
+display: flex;
+flex-direction: column;
+align-items: start;
+justify-content: space-between;
+border: 1px solid #17202D;
+border-radius: 10px;
+background-color: #050D16;
+padding: 25px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.login-logo{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center ;
+  justify-content: space-between;
+}
+
+.h2-signup{
+  color: #f1f1f1;
+  font-size: 3rem;
+  font-family: monospace;
+
+}
+
+.logo-app-name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.p-app-name{
+  color: #f1f1f1;
+  font-size: 1.5rem;
+  font-family: monospace;
+  width: 140px;
+}
+
+.logo{
+  width: 75px;
+}
+
+.form-signup{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 6px;
+}
+
+.label-signup{
+  font-size: 1.5rem;
+  color: #a0a2a8;
+}
+
+.input-signup{
+  width: auto;
+  padding: 8px;
+  background-color: #05070A;
+  border: 1px solid #17202D;
+  border-radius: 6px;
+  color: #f1f1f1;
+  transition: all 0.15s;
+  &::placeholder{
+    font-size: 1em;
+    font-family: monospace;
+  }
+  &:hover{
+    border: 1px solid #30445f;
+  }
+  &:focus{
+    outline: 2px solid #0e58c6;
+    box-shadow: 0 0 2px 2px #0e58c6;
+  }
+}
+
+.btn-signup{
+  border-radius: 2px;
+  padding: 8px;
+  &:hover{
+    background-color: #afbae1;
+  }
+  &:active{
+    background-color: #7c8cc6;
+  }
+}
+
+.container-login{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.p-login{
+  color: #f1f1f1;
+}
+
+.a-login {
+  position: relative;
+  color: #c2c5e1;
+  text-decoration: none;
+}
+
+.a-login::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20px;
+  width: 100%;
+  height: 2px;
+  background-color: #f1f1f161;
+  transition: width 0.25s ease;
+}
+
+.a-login:hover::after {
+  width: 0;
+}
