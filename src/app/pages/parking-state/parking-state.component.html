@@ -1,9 +1,63 @@
 <div class="page-parking-state">
     <header>
-      <h2 class="h2-app">PARKING APP</h2>
+      <h2 class="h2-app">{{ title }}</h2>
       <nav>
         <a class="page-name">PARKING STATE</a>
         <a><img class="profile-pic" src=".\images\profile-icon.png" alt="Profile Picture"></a>
       </nav>
+      
     </header>
-</div>
+    <main>
+      
+      @if (parking.length !== 0){
+        <div class="table-container">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>{{tableHeader.c1}}</th>
+                <th>{{tableHeader.c2}}</th>
+                <th>{{tableHeader.c3}}</th>
+                <th>{{tableHeader.c3}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (spot of parking; track $index) {
+                <tr>
+                  <td>{{spot.number}}</td>
+                  <td [ngClass]="{'available': spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</td>
+                  <td>{{spot.entry}}</td>
+                  <td style="align-items: start;">
+                    @if (spot.available)
+                    {
+                      <button style="margin-right: 20px;" (click)="occupyParkingState($index)">Occupy</button>
+                    } @else {
+                      <button style="margin-right: 20px;" (click)="setFreeParkingState($index)">Free It</button>
+                    }
+                    <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><img src=".\images\trash-can-ico.svg" alt=""></button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        
+      <div class="btn-container">
+        <button class="btn-admin" (click)="addNew()">Add New</button>
+        <button class="btn-admin" (click)="deleteAll()">Delete All</button>
+      </div>
+      } @else {
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>{{tableHeader.c1}}</th>
+              <th>{{tableHeader.c2}}</th>
+              <th>{{tableHeader.c3}}</th>
+              <th>{{tableHeader.c3}}</th>
+            </tr>
+          </thead>
+        </table>
+        <button class="btn-admin" (click)="addNew()">Add New</button>
+      }
+  </main>
+
+  </div>
