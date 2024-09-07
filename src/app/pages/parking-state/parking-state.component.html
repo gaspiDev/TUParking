@@ -23,10 +23,10 @@
             <tbody>
               @for (spot of parking; track $index) {
                 <tr>
-                  <td>{{spot.number}}</td>
-                  <td><div class="centered-availability"><div [ngClass]="{'available': spot.available, 'occupied': !spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</div></div></td>
-                  <td>{{spot.entry}}</td>
-                  <td style="align-items: start;">
+                  <td><div class="centered-td">{{spot.number}}</div></td>
+                  <td><div class="centered-td"><div [ngClass]="{'available': spot.available, 'occupied': !spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</div></div></td>
+                  <td><div class="centered-td">{{spot.entry}}</div></td>
+                  <td style="align-items: start;"><div class="centered-td">
                     @if (spot.available)
                     {
                       <button style="margin-right: 20px;" (click)="occupyParkingState($index)">Occupy</button>
@@ -34,6 +34,7 @@
                       <button style="margin-right: 20px;" (click)="setFreeParkingState($index)">Release</button>
                     }
                     <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><img src=".\images\trash-can-ico.svg" alt=""></button>
+                  </div>
                   </td>
                 </tr>
               }
@@ -55,6 +56,11 @@
               <th>{{tableHeader.c4}}</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <td colspan="4" style="text-align: center;"> <p>No Current Parking Spots </p></td>
+            </tr>
+          </tbody>
         </table>
         <button class="btn-admin" (click)="addNew()">Add New</button>
       }

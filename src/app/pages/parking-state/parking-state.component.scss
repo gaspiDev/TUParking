@@ -60,7 +60,7 @@ main{
 }
 
 .table-container{
-  height: 480px;
+  height: 550px;
   width: 100%;
   overflow-y: auto;
 }
@@ -167,7 +167,7 @@ main{
 }
 
 .table-container::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 .table-container::-webkit-scrollbar-track {
@@ -189,7 +189,7 @@ main{
   background: linear-gradient(135deg, #6b7280, #4b5563);
 }
 
-.centered-availability{
+.centered-td{
   display: flex;
   justify-content: center;
 }
@@ -216,7 +216,7 @@ main{
 
 .btn-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px;
 }
 
