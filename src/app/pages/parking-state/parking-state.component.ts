@@ -25,12 +25,17 @@ export class ParkingStateComponent {
   parking: Parking[] = []
 
   lastNumber = this.parking[this.parking.length-1]?.number || 0;
+  
+  time(){
+    return  new Date();
+  }
+
   addNew(){
     this.parking.push(
       {
         number: this.lastNumber + 1,
         available: true,
-        entry: '-'
+        entry: `${this.time().getHours()}:${this.time().getMinutes()}`
       }
     )
   this.lastNumber++;

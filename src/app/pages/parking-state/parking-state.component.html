@@ -1,10 +1,10 @@
 <div class="page-parking-state">
     <header>
       <h2 class="h2-app">{{ title }}</h2>
-      <nav>
+      <!-- <nav>
         <a class="page-name">PARKING STATE</a>
         <a><img class="profile-pic" src=".\images\profile-icon.png" alt="Profile Picture"></a>
-      </nav>
+      </nav> -->
       
     </header>
     <main>
@@ -17,21 +17,21 @@
                 <th>{{tableHeader.c1}}</th>
                 <th>{{tableHeader.c2}}</th>
                 <th>{{tableHeader.c3}}</th>
-                <th>{{tableHeader.c3}}</th>
+                <th>{{tableHeader.c4}}</th>
               </tr>
             </thead>
             <tbody>
               @for (spot of parking; track $index) {
                 <tr>
                   <td>{{spot.number}}</td>
-                  <td [ngClass]="{'available': spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</td>
+                  <td><div class="centered-availability"><div [ngClass]="{'available': spot.available, 'occupied': !spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</div></div></td>
                   <td>{{spot.entry}}</td>
                   <td style="align-items: start;">
                     @if (spot.available)
                     {
                       <button style="margin-right: 20px;" (click)="occupyParkingState($index)">Occupy</button>
                     } @else {
-                      <button style="margin-right: 20px;" (click)="setFreeParkingState($index)">Free It</button>
+                      <button style="margin-right: 20px;" (click)="setFreeParkingState($index)">Release</button>
                     }
                     <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><img src=".\images\trash-can-ico.svg" alt=""></button>
                   </td>
@@ -52,7 +52,7 @@
               <th>{{tableHeader.c1}}</th>
               <th>{{tableHeader.c2}}</th>
               <th>{{tableHeader.c3}}</th>
-              <th>{{tableHeader.c3}}</th>
+              <th>{{tableHeader.c4}}</th>
             </tr>
           </thead>
         </table>
