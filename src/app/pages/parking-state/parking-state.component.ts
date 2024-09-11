@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Parking } from '../../Interfaces/parking';
 import { CommonModule } from '@angular/common';
+import { HeaderAdminComponent } from './header-admin/header-admin.component';
 
 
 @Component({
   selector: 'app-parking-state',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, HeaderAdminComponent],
   templateUrl: './parking-state.component.html',
   styleUrl: './parking-state.component.scss'
 })
 export class ParkingStateComponent {
-
-  title: string = 'TUParking';
  
   tableHeader = {
     c1: 'Spot Number',

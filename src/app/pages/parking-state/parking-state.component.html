@@ -1,14 +1,6 @@
 <div class="page-parking-state">
-    <header>  
-      <h2 class="h2-app">{{ title }}</h2>
-      <!-- <nav>
-        <a class="page-name">PARKING STATE</a>
-        <a><img class="profile-pic" src=".\images\profile-icon.png" alt="Profile Picture"></a>
-      </nav> -->
-      
-    </header>
+  <app-header-admin></app-header-admin>
     <main>
-      
       @if (parking.length !== 0){
         <div class="table-container">
           <table class="styled-table">
@@ -41,7 +33,6 @@
             </tbody>
           </table>
         </div>
-        
       <div class="btn-container">
         <button class="btn-admin" (click)="addNew()">Add New</button>
         <button class="btn-admin" (click)="deleteAll()">Delete All</button>
