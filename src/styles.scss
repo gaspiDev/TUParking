@@ -6,3 +6,16 @@
   font-family: monospace;
   font-size: 1rem;
 }
+
+body{
+  background: radial-gradient(circle, #0a192f, #020c1b 60%);
+}
+
+a { 
+  text-decoration: none;
+  color: inherit;
+  margin: 0; 
+  padding: 0; 
+  display: inline-flex; 
+  width: auto;
+}

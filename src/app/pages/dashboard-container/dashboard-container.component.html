@@ -1,0 +1,12 @@
+<header>  
+  <h2 class="h2-app">{{ title }}</h2>
+  <nav>
+    <a [routerLink]="['/parking-state']" routerLinkActive="my-link" >Parking State</a>
+    @if (isAdmin){
+      <a [routerLink]="['/reports']" routerLinkActive="my-link" >Reports</a>
+      <a [routerLink]="['/prices']" routerLinkActive="my-link" >Prices</a>
+    }
+    <a>User</a>
+  </nav>
+</header>
+<router-outlet />

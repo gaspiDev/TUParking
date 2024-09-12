@@ -1,8 +1,7 @@
 .page-parking-state{
-  height: 100vh;
-  background: radial-gradient(circle, #0a192f, #020c1b 60%);
   display: flex;
   flex-direction: column;
+  height: 90%;
 }
 
 main{
@@ -10,11 +9,11 @@ main{
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 50px;
+  margin: 50px 50px 0 50px;
 }
 
 .table-container{
-  height: 550px;
+  height: 535px;
   width: 100%;
   overflow-y: auto;
 }

@@ -1,7 +1,6 @@
 <div class="page-parking-state">
-  <app-header-admin></app-header-admin>
     <main>
-      @if (parking.length !== 0){
+      @if (this.parkingServices.parking.length !== 0){
         <div class="table-container">
           <table class="styled-table">
             <thead>
@@ -13,7 +12,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (spot of parking; track $index) {
+              @for (spot of this.parkingServices.parking; track $index) {
                 <tr>
                   <td><div class="centered-td">{{spot.number}}</div></td>
                   <td><div class="centered-td"><div [ngClass]="{'available': spot.available, 'occupied': !spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</div></div></td>
@@ -25,7 +24,9 @@
                     } @else {
                       <button class="actions-btn" (click)="setFreeParkingState($index)">Release</button>
                     }
-                    <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><img src=".\images\trash-can-ico.svg" alt=""></button>
+                    @if(isAdmin){
+                      <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><img src=".\images\trash-can-ico.svg" alt=""></button>
+                    }
                   </div>
                   </td>
                 </tr>
@@ -35,7 +36,6 @@
         </div>
       <div class="btn-container">
         <button class="btn-admin" (click)="addNew()">Add New</button>
-        <button class="btn-admin" (click)="deleteAll()">Delete All</button>
       </div>
       } @else {
         <table class="styled-table">
@@ -53,8 +53,9 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn-admin" (click)="addNew()">Add New</button>
+        @if(isAdmin){
+          <button class="btn-admin" (click)="addNew()">Add New</button>
+        }
       }
   </main>
-
   </div>

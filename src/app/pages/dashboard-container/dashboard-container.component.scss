@@ -1,9 +1,11 @@
+
 header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-top: 10px;
   padding-right: 20px;
+  height: 10%;
 }
 
 .h2-app{
@@ -27,12 +29,15 @@ header{
 
 nav{
   display: flex;
-  width: 15%;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;  
+  gap: 30px;
 }
 
-.page-name{
+header a{
   color: #f1f1f1;
+}
+
+.my-link:visited{
+  color: rgb(148, 186, 199)
 }
