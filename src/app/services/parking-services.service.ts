@@ -21,7 +21,7 @@ export class ParkingServicesService {
       {
         number: this.lastNumber + 1,
         available: true,
-        entry: `${this.time().getDate().toString().padStart(2, '0')}/${(this.time().getMonth() + 1).toString().padStart(2, '0')} ${this.time().getHours().toString().padStart(2, '0')}:${this.time().getMinutes().toString().padStart(2, '0')}`
+        entry: `${this.time().getHours().toString().padStart(2, '0')}:${this.time().getMinutes().toString().padStart(2, '0')} ${this.time().getDate().toString().padStart(2, '0')}/${(this.time().getMonth() + 1).toString().padStart(2, '0')}`
       })
     this.lastNumber++;
     }

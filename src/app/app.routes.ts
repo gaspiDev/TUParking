@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "",
+    path: "app",
     component: DashboardContainerComponent,
     canActivate: [onlyLoggedGuard],
     children: [
@@ -51,15 +51,11 @@ export const routes: Routes = [
       onlyPublicGuard
     ]
   },
-  /* {
-    path: "parking-state",
-    component: ParkingStateComponent
-  }, */
-  // {
-  //   path: "",
-  //   redirectTo: "login",
-  //   pathMatch: "full"
-  // },
+  {
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
+  },
   {
     path: "not-found",
     component: NotFoundComponent

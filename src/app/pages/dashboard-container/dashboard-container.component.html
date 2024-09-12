@@ -1,12 +1,18 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
 <header>  
-  <h2 class="h2-app">{{ title }}</h2>
+  <div class="logo-app-name">
+    <img class="logo" src=".\images\tuparking-logo.svg" alt="logo">
+    <p class="p-app-name">TUParking Management</p>
+  </div>
   <nav>
-    <a [routerLink]="['/parking-state']" routerLinkActive="my-link" >Parking State</a>
+    <a [routerLink]="['/app/parking-state']" routerLinkActive="my-link" >Parking State</a>
     @if (isAdmin){
-      <a [routerLink]="['/reports']" routerLinkActive="my-link" >Reports</a>
-      <a [routerLink]="['/prices']" routerLinkActive="my-link" >Prices</a>
+      <a [routerLink]="['/app/reports']" routerLinkActive="my-link" >Reports</a>
+      <a [routerLink]="['/app/prices']" routerLinkActive="my-link" >Prices</a>
     }
-    <a>User</a>
+    <a [routerLink]="['/login']" routerLinkActive="my-link" ><span class="material-symbols-outlined">
+      account_box
+      </span></a>
   </nav>
 </header>
 <router-outlet />

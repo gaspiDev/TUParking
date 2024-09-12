@@ -10,20 +10,19 @@ export class ModalsServicesService {
   async modalDelete():Promise<boolean>{
     const  modal = await Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      text: "You won't be able to revert this!",
       icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      iconColor: '#ffcc50',
+      background: '#1c2833',
+      color: '#f2f2f2',
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!'
-    })
+      confirmButtonColor: '#178117',
+      cancelButtonText: 'No, cancel!',
+      cancelButtonColor: '#be3939',
+      showCancelButton: true,
+      buttonsStyling: true,
+    });
     if(modal.isConfirmed) {
-     Swal.fire(
-         'Deleted!',
-         'Your file has been deleted.',
-         'success'
-       );
         return true
       } else return false;
     };
