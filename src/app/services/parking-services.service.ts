@@ -8,7 +8,6 @@ export class ParkingServicesService {
   parking: Parking[] = [];
 
   lastNumber = this.parking[this.parking.length-1]?.number || 0;
-
   
   constructor() {}
   
