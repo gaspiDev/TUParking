@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReportsComponent } from '../reports/reports.component';
 import { PricesComponent } from '../prices/prices.component';
 import { ParkingStateComponent } from '../parking-state/parking-state-component';
+import { ParkingServicesService } from '../../services/parking-service.service';
 
 @Component({
   selector: 'app-dashboard-container',
@@ -13,5 +14,5 @@ import { ParkingStateComponent } from '../parking-state/parking-state-component'
 })
 export class DashboardContainerComponent {
   title: string = 'TUParking';
-  isAdmin = true;
+  parkingServices = inject(ParkingServicesService)
 }

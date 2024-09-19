@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { Parking } from '../../Interfaces/parking';
 import { CommonModule } from '@angular/common';
 import { ModalsServicesService } from '../../services/modals-services.service';
-import { ParkingServicesService } from '../../services/parking-services.service';
+import { ParkingServicesService } from '../../services/parking-service.service';
+import { DataAuthService } from '../../services/data-auth.service';
 
 
 @Component({
@@ -16,20 +17,13 @@ import { ParkingServicesService } from '../../services/parking-services.service'
 export class ParkingStateComponent {
  modalServices = inject(ModalsServicesService)
  parkingServices = inject(ParkingServicesService)
- parking = this.parkingServices.parking
   tableHeader = {
     c1: 'Spot Number',
     c2: 'Availability',
     c3: 'Ingress Time',
     c4: 'Actions'
   }
-
- 
   
-  addNew(){
-    this.parkingServices.addNew();
-  }
-
   async deleteThatSpot(index: number){
    
    if(await this.modalServices.modalDelete()){
@@ -39,12 +33,13 @@ export class ParkingStateComponent {
   }
 
   occupyParkingState(index: number){
-    this.parkingServices.parking[index].available = false
+    this.parkingServices.parking[index].deshabilitada = 1
   }
 
   setFreeParkingState(index: number){
-    this.parkingServices.parking[index].available = true
+    this.parkingServices.parking[index].deshabilitada = 0
   }
-  isAdmin = true;
+
+
 }
 

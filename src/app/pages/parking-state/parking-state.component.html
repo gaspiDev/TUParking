@@ -14,17 +14,18 @@
             <tbody>
               @for (spot of this.parkingServices.parking; track $index) {
                 <tr>
-                  <td><div class="centered-td">{{spot.number}}</div></td>
-                  <td><div class="centered-td"><div [ngClass]="{'available': spot.available, 'occupied': !spot.available}">{{spot.available ? 'Available' : 'Occupied'}}</div></div></td>
-                  <td><div class="centered-td">{{spot.entry}}</div></td>
+                  <td><div class="centered-td">{{spot.id}}</div></td>
+                  <td><div class="centered-td"><div [ngClass]="{'available': spot.deshabilitada, 'occupied': !spot.deshabilitada}">{{spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
+                  <td><div class="centered-td">12:00</div></td>
                   <td><div class="centered-td">
-                    @if (spot.available)
+                    @if (!spot.deshabilitada)
                     {
                       <button class="actions-btn" (click)="occupyParkingState($index)">Occupy</button>
                     } @else {
                       <button class="actions-btn" (click)="setFreeParkingState($index)">Release</button>
                     }
-                    @if(isAdmin){
+                    @if(this.parkingServices.authService.usuario?.isAdmin)
+                    {
                       <button class="btn-deleteThat" (click)="deleteThatSpot($index)"><span class="material-symbols-outlined">
                         delete
                         </span></button>
@@ -35,9 +36,10 @@
               }
             </tbody>
           </table>
-      @if(isAdmin){
+      @if(this.parkingServices.authService.usuario?.isAdmin)
+      {
         <div class="btn-container">
-          <button class="btn-admin" (click)="addNew()">Add New</button>
+          <button class="btn-admin" >Add New</button>
         </div>
       }
       } @else {
@@ -56,8 +58,9 @@
             </tr>
           </tbody>
         </table>
-        @if(isAdmin){
-          <button class="btn-admin" (click)="addNew()">Add New</button>
+        @if(this.parkingServices.authService.usuario?.isAdmin)
+        {
+          <button class="btn-admin" >Add New</button>
         }
       }
   </main>

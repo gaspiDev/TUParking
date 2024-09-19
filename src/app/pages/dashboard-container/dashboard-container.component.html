@@ -6,7 +6,8 @@
   </div>
   <nav>
     <a [routerLink]="['/app/parking-state']" routerLinkActive="my-link" >Parking State</a>
-    @if (isAdmin){
+    @if (this.parkingServices.authService.usuario?.isAdmin)
+    {
       <a [routerLink]="['/app/reports']" routerLinkActive="my-link" >Reports</a>
       <a [routerLink]="['/app/prices']" routerLinkActive="my-link" >Prices</a>
     }
