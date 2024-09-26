@@ -73,14 +73,14 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: #84868C;
 }
 
-.password-show-hide{
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
+.password-show-hide{  
+  position: relative;
 }
 .btn-show-hide{
   background: none;
+  position: absolute;
+  bottom: -43px;
+  right: 7px;
 }
 
 .input-signin{
