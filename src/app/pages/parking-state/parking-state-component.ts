@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Parking } from '../../Interfaces/parking';
 import { CommonModule } from '@angular/common';
 import { ModalsServicesService } from '../../services/modals-services.service';
 import { ParkingServicesService } from '../../services/parking-service.service';
-import { DataAuthService } from '../../services/data-auth.service';
 
 
 @Component({

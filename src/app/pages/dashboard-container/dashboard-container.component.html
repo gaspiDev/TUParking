@@ -6,11 +6,11 @@
   </div>
   <nav>
     <a [routerLink]="['/app/parking-state']" routerLinkActive="my-link" >Parking State</a>
-    <!-- @if (this.parkingServices.authService.usuario?.isAdmin)
-    { -->
+    @if (this.parkingServices.authService.usuario?.isAdmin)
+    {
       <a [routerLink]="['/app/reports']" routerLinkActive="my-link" >Reports</a>
       <a [routerLink]="['/app/prices']" routerLinkActive="my-link" >Prices</a>
-    <!-- } -->
+    }
     <a [routerLink]="['/login']" routerLinkActive="my-link" ><span class="material-symbols-outlined">
       account_box
       </span></a>

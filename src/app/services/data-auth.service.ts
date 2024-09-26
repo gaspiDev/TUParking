@@ -26,7 +26,7 @@ export class DataAuthService {
     this.usuario = {
       username: loginData.username,
       token: resJson.token,
-      isAdmin: false
+      isAdmin: true
     }
     return resJson;
   }

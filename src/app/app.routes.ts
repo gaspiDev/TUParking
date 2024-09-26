@@ -11,13 +11,14 @@ import { onlyLoggedGuard } from './guards/only-logged.guard';
 
 export const routes: Routes = [
   {
-    path: "",
-    redirectTo: "login",
-    pathMatch: "full"
+    path: "login",
+    component: LoginComponent,
+    title: "TUParking Login"
   },
   {
-    path: "login",
-    component: LoginComponent
+    path: "signup",
+    component: SignupComponent,
+    title: "TUParking SignUp"
   },
   {
     path: "app",
@@ -31,30 +32,31 @@ export const routes: Routes = [
       },
       {
         path: "parking-state",
-        component: ParkingStateComponent
+        component: ParkingStateComponent,
+        title: "TUParking State"
       },
       {
         path: "reports",
         component: ReportsComponent,
-        canActivate: [onlyAdminGuard]
+        canActivate: [onlyAdminGuard],
+        title: "TUParking Reports"
       },
       {
         path: "prices",
         component: PricesComponent,
-        canActivate: [onlyAdminGuard]
+        canActivate: [onlyAdminGuard],
+        title: "TUParking Prices"
       }
     ]
   },
   {
-    path: "signup",
-    component: SignupComponent
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
   },
   {
-    path: "not-found",
-    component: NotFoundComponent
-  },
-  {
-    path: "login",
-    component: LoginComponent
-  },
+    path: "**",
+    component: NotFoundComponent,
+    title: "TUParking Not Found"
+  }
 ];

@@ -1,17 +1,15 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { DataAuthService } from '../services/data-auth.service';
-import Swal from 'sweetalert2';
+import { ModalsServicesService } from '../services/modals-services.service';
 
 export const onlyAdminGuard: CanActivateFn = (route, state) => {
+  const modal = inject(ModalsServicesService);
   const authorization = inject(DataAuthService);
-  if(authorization.usuario?.isAdmin) return true;
-  Swal.fire({
-    icon: 'error',
-    title: 'Acceso denegado',
-    text: 'No estás autorizado para acceder a esta sección.',
-    confirmButtonText: 'Entendido',
-    confirmButtonColor: '#d33'
-  });
+  const router = inject(Router)
+  if (authorization.usuario?.isAdmin) return true;
+  modal.modalAccesDenied().then(() => {
+    router.navigate(['app/parking-state']);
+  });;
   return false;
 };
