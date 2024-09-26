@@ -15,6 +15,7 @@ import { ParkingServicesService } from '../../services/parking-service.service';
 export class ParkingStateComponent {
  modalServices = inject(ModalsServicesService)
  parkingServices = inject(ParkingServicesService)
+
   tableHeader = {
     c1: 'Spot Number',
     c2: 'Availability',
@@ -23,11 +24,9 @@ export class ParkingStateComponent {
   }
   
   async deleteThatSpot(index: number){
-   
    if(await this.modalServices.modalDelete()){
-    this.parkingServices.parking.splice(index, 1)
+    this.parkingServices.deleteThatSpot(index);
    }
-
   }
 
   occupyParkingState(index: number){
@@ -38,6 +37,9 @@ export class ParkingStateComponent {
     this.parkingServices.parking[index].deshabilitada = 0
   }
 
+  modalAddSpotNow(){
+    this.modalServices.modalAddSpot()
+  }
 
 }
 

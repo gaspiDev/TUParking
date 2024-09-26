@@ -22,8 +22,11 @@ export class ParkingServicesService {
       }
     }
     );
-    const resJson: Parking[] = await res.json();
-    this.parking = resJson;
+    this.parking = await res.json();
+  }
+
+  async deleteThatSpot(index:number){
+    const res = await fetch('http://localhost:5000/cocheras')
   }
 
   time(){

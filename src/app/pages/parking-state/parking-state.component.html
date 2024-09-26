@@ -39,7 +39,7 @@
       @if(this.parkingServices.authService.usuario?.isAdmin)
       {
         <div class="btn-container">
-          <button class="btn-admin" >Add New</button>
+          <button class="btn-admin" (click)="modalAddSpotNow()">Add New</button>
         </div>
       }
       } @else {
@@ -60,7 +60,7 @@
         </table>
         @if(this.parkingServices.authService.usuario?.isAdmin)
         {
-          <button class="btn-admin" >Add New</button>
+          <button class="btn-admin" (click)="modalAddSpotNow()" >Add New</button>
         }
       }
   </main>

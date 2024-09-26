@@ -56,4 +56,20 @@ export class ModalsServicesService {
       cancelButtonColor: '#be3939',
       buttonsStyling: true})
   }
+
+  modalAddSpot(){
+    Swal.fire({
+      title: 'Add a New Spot',
+      input: 'text',
+      inputLabel: 'Spot Floor and Number',
+      inputPlaceholder: 'A01, B02 ...',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(`You entered: ${result.value}`)
+      }
+    });
+  }
   }
