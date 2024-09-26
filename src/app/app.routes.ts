@@ -6,14 +6,19 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardContainerComponent } from './pages/dashboard-container/dashboard-container.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { PricesComponent } from './pages/prices/prices.component';
-import { onlyPublicGuard } from './guards/only-public.guard';
 import { onlyAdminGuard } from './guards/only-admin.guard';
 import { onlyLoggedGuard } from './guards/only-logged.guard';
 
 export const routes: Routes = [
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    title: "TUParking Login"
+  },
+  {
+    path: "signup",
+    component: SignupComponent,
+    title: "TUParking SignUp"
   },
   {
     path: "app",
@@ -28,27 +33,20 @@ export const routes: Routes = [
       {
         path: "parking-state",
         component: ParkingStateComponent,
-        canActivate: [
-          onlyPublicGuard
-        ]
+        title: "TUParking State"
       },
       {
         path: "reports",
         component: ReportsComponent,
-        canActivate: [onlyAdminGuard]
+        canActivate: [onlyAdminGuard],
+        title: "TUParking Reports"
       },
       {
         path: "prices",
         component: PricesComponent,
-        canActivate: [onlyAdminGuard]
+        canActivate: [onlyAdminGuard],
+        title: "TUParking Prices"
       }
-    ]
-  },
-  {
-    path: "signup",
-    component: SignupComponent,
-    canActivate: [
-      onlyPublicGuard
     ]
   },
   {
@@ -57,12 +55,8 @@ export const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: "not-found",
-    component: NotFoundComponent
-  },
-  {
     path: "**",
-    redirectTo: "not-found",
-    pathMatch: "full"
-  },
+    component: NotFoundComponent,
+    title: "TUParking Not Found"
+  }
 ];

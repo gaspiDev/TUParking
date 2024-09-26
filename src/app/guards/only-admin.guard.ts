@@ -1,8 +1,15 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { DataAuthService } from '../services/data-auth.service';
+import { ModalsServicesService } from '../services/modals-services.service';
 
 export const onlyAdminGuard: CanActivateFn = (route, state) => {
+  const modal = inject(ModalsServicesService);
   const authorization = inject(DataAuthService);
-  return authorization.usuario?.isAdmin ? true : false;
+  const router = inject(Router)
+  if (authorization.usuario?.isAdmin) return true;
+  modal.modalAccesDenied().then(() => {
+    router.navigate(['app/parking-state']);
+  });;
+  return false;
 };

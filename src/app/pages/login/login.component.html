@@ -7,16 +7,18 @@
         <p class="p-app-name">TUParking Management</p>
       </div>
     </div>
-    <form class="form-signin">
+    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="input-field">
         <label class="label-signin">Username</label>
-        <input required id='input-username' class="input-signin" type="text" placeholder="employe1234">
+        <input required id='input-username' name="username" class="input-signin" type="text" placeholder="employe1234" ngModel required>
       </div>
       <div class="input-field">
-        <label class="label-signin">Password</label>
-        <input id="input-password" class="input-signin" type="password" placeholder="********">
+        <div class="password-show-hide">
+            <label class="label-signin">Password</label><button class="btn-show-hide" type="button" (click)="showPassword()">@if (shownPassword){<img  src="./images/eye-closed.svg" alt="">}@else {<img  src="./images/eye-open.svg" alt="">}</button>
+        </div>
+        <input id="input-password" name="password" class="input-signin" type="password" placeholder="********" ngModel required>
       </div>
-        <button class="btn-signin" type="button" (click)="login()">Log In</button>
+        <button [disabled]="loginForm.invalid" class="btn-signin" type="submit">Log In</button>
     </form>
     <div class="container-signup">
       <p class="p-signup">Dont't have an account?</p>
