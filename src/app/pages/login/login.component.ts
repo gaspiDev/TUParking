@@ -3,24 +3,29 @@ import { Router, RouterModule } from '@angular/router';
 import { Login} from '../../Interfaces/login';
 import { DataAuthService } from '../../services/data-auth.service';
 import Swal from 'sweetalert2';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   authService = inject(DataAuthService)
   router = inject(Router)
-  loginData:Login = {
-    username: 'admin',
-    password: 'admin'
-  }
-  async login(){
-    const resJson = await this.authService.login(this.loginData);
+
+  shownPassword: boolean = true;
+  showPassword(){
+    this.shownPassword = !this.shownPassword;
     
+  }
+
+  async login(loginForm: NgForm){
+    const {username, password} = loginForm.value;
+    const loginData: Login = {username, password};
+    const resJson = await this.authService.login(loginData);
     if (resJson){
       this.router.navigate(['app', 'parking-state']);
     }else {

@@ -60,15 +60,27 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   gap: 15px;
 }
 
+
 .input-field{
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 8px;
 }
 
 .label-signin{
   font-size: 1.5rem;
   color: #84868C;
+}
+
+.password-show-hide{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+.btn-show-hide{
+  background: none;
 }
 
 .input-signin{
@@ -95,12 +107,22 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 .btn-signin{
   border-radius: 2px;
   padding: 8px;
+  cursor: pointer;
   transition: background-color 0.15s;
   &:hover{
     background-color: #afbae1;
   }
   &:active{
     background-color: #7c8cc6;
+  }
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    color: #000;
+    &:hover {
+      background-color: #7c8cc6;
+    }
   }
 }
 

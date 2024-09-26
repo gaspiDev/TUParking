@@ -6,11 +6,15 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { DashboardContainerComponent } from './pages/dashboard-container/dashboard-container.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { PricesComponent } from './pages/prices/prices.component';
-import { onlyPublicGuard } from './guards/only-public.guard';
 import { onlyAdminGuard } from './guards/only-admin.guard';
 import { onlyLoggedGuard } from './guards/only-logged.guard';
 
 export const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
+  },
   {
     path: "login",
     component: LoginComponent
@@ -27,10 +31,7 @@ export const routes: Routes = [
       },
       {
         path: "parking-state",
-        component: ParkingStateComponent,
-        canActivate: [
-          onlyPublicGuard
-        ]
+        component: ParkingStateComponent
       },
       {
         path: "reports",
@@ -46,23 +47,14 @@ export const routes: Routes = [
   },
   {
     path: "signup",
-    component: SignupComponent,
-    canActivate: [
-      onlyPublicGuard
-    ]
-  },
-  {
-    path: "",
-    redirectTo: "login",
-    pathMatch: "full"
+    component: SignupComponent
   },
   {
     path: "not-found",
     component: NotFoundComponent
   },
   {
-    path: "**",
-    redirectTo: "not-found",
-    pathMatch: "full"
+    path: "login",
+    component: LoginComponent
   },
 ];
