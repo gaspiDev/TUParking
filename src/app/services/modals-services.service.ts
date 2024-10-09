@@ -72,4 +72,38 @@ export class ModalsServicesService {
       }
     });
   }
+
+  modalSignUpFailed(){
+    Swal.fire({
+      title: 'Sign Up Failed',
+      text: 'There was an issue with your registration. Please try again.',
+      icon: 'error',
+      iconColor: '#be3939',
+      background: '#1c2833',
+      color: '#f2f2f2',
+      confirmButtonText: 'Retry',
+      confirmButtonColor: '#178117',
+      cancelButtonText: 'Cancel',
+      cancelButtonColor: '#be3939',
+      showCancelButton: true,
+      buttonsStyling: true
+    })    
+  }
+
+  modalSignUpSuccesfull(){
+    Swal.fire({
+      title: 'Sign Up Successful',
+      text: 'Your account has been created successfully!',
+      icon: 'success',
+      iconColor: '#178117',
+      background: '#1c2833',
+      color: '#f2f2f2',
+      confirmButtonText: 'Continue',
+      confirmButtonColor: '#178117',
+      cancelButtonText: 'Close',
+      cancelButtonColor: '#be3939',
+      showCancelButton: true,
+      buttonsStyling: true
+    })  
+  }
   }
