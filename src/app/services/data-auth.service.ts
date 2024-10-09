@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../Interfaces/user';
 import { Login, ResLogin } from '../Interfaces/login';
+import { SignUp } from '../Interfaces/signUp';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,19 @@ export class DataAuthService {
       isAdmin: true
     }
     return resJson;
+  }
+  
+  async signUp(signUpData: SignUp)
+  {
+    console.log("aca entro al service")
+    const res = await fetch('http://localhost:5000/register', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(signUpData)
+    })
+    if(res.status !== 201) return/*early error*/;
+    return res;
   }
 }
