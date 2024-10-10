@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { NewSpot } from '../Interfaces/newSpot';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import Swal from 'sweetalert2';
 export class ModalsServicesService {
 
   constructor() { }
-  async modalDelete():Promise<boolean>{
+  async modalDelete():Promise<true | null>{
     const  modal = await Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -24,7 +25,7 @@ export class ModalsServicesService {
     });
     if(modal.isConfirmed) {
         return true
-      } else return false;
+      } else return null;
     };
 
   async modalAccesDenied(){
@@ -57,8 +58,8 @@ export class ModalsServicesService {
       buttonsStyling: true})
   }
 
-  modalAddSpot(){
-    Swal.fire({
+  modalAddSpot(): Promise<NewSpot | null> {
+    return Swal.fire({
       title: 'Add a New Spot',
       input: 'text',
       inputLabel: 'Spot Floor and Number',
@@ -68,7 +69,11 @@ export class ModalsServicesService {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(`You entered: ${result.value}`)
+        const descripcion = result.value;
+        const newSpot: NewSpot = {descripcion};
+        return newSpot;
+      } else {
+        return null;
       }
     });
   }

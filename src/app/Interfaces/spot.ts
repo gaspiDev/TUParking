@@ -1,4 +1,4 @@
-export interface Parking{
+export interface Spot{
   id: number,
   descripcion: string,
   deshabilitada: number,

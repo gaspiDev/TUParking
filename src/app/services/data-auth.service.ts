@@ -34,7 +34,6 @@ export class DataAuthService {
   
   async signUp(signUpData: SignUp)
   {
-    console.log("aca entro al service")
     const res = await fetch('http://localhost:5000/register', {
       method: 'POST',
       headers: {

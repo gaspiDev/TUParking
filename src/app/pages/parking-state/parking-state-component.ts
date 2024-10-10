@@ -23,23 +23,28 @@ export class ParkingStateComponent {
     c4: 'Actions'
   }
   
-  async deleteThatSpot(index: number){
-   if(await this.modalServices.modalDelete()){
-    this.parkingServices.deleteThatSpot(index);
+  occupyParkingState(id: number){
+    this.parkingServices.spots[id].deshabilitada = 1
+  }
+  
+  setFreeParkingState(id: number){
+    //this.parkingServices.enableSpot(id);
+  }
+  
+  async addNewSpot(){
+    const modal = await this.modalServices.modalAddSpot();
+    if(modal !== null){
+      await this.parkingServices.addNewSpot(modal);
+      this.parkingServices.getSpots();
+    }
+  }
+  
+  async deleteThatSpot(id: number){
+    const modal = await this.modalServices.modalDelete();
+    if(modal !== null){
+     await this.parkingServices.deleteThatSpot(id);
+     this.parkingServices.getSpots();
    }
   }
-
-  occupyParkingState(index: number){
-    this.parkingServices.parking[index].deshabilitada = 1
-  }
-
-  setFreeParkingState(index: number){
-    this.parkingServices.parking[index].deshabilitada = 0
-  }
-
-  modalAddSpotNow(){
-    this.modalServices.modalAddSpot()
-  }
-
 }
 
