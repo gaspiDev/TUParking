@@ -6,5 +6,6 @@ export interface Login{
 export interface ResLogin{
   status: string,
   mensaje: string,
-  token?: string
+  token?: string,
+  isAdmin: number
 }

@@ -23,12 +23,14 @@ export class ParkingStateComponent {
     c4: 'Actions'
   }
   
-  occupyParkingState(id: number){
-    this.parkingServices.spots[id].deshabilitada = 1
+  async setSpotOccupy(id: number){
+    await this.parkingServices.setSpotOccupy(id);
+    this.parkingServices.getSpots();
   }
   
-  setFreeParkingState(id: number){
-    //this.parkingServices.enableSpot(id);
+  async setSpotFree(id: number){
+    await this.parkingServices.setSpotFree(id);
+    this.parkingServices.getSpots();
   }
   
   async addNewSpot(){

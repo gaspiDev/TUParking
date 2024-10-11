@@ -25,7 +25,7 @@ export class ParkingServicesService {
     );
     this.spots = await res.json();
   }
-
+ 
   async addNewSpot(newSpotDescription: NewSpot){
     const res = await fetch('http://localhost:5000/cocheras', {
       method: 'POST',
@@ -48,6 +48,32 @@ export class ParkingServicesService {
         authorization: 'Bearer ' + this.authService.usuario?.token
       }
     })
+    if(res.status !== 201) return/*early error*/;
+    return res;
+  }
+
+  async setSpotFree(id: number){
+    const url = `http://localhost:5000/cocheras/${id}/enable`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        authorization: 'Bearer ' + this.authService.usuario?.token
+      }
+    })
+    if(res.status !== 201) return/*early error*/;
+    return res;
+  }
+
+  async setSpotOccupy(id: number){
+    const url = `http://localhost:5000/cocheras/${id}/disable`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        authorization: 'Bearer ' + this.authService.usuario?.token 
+    }
+  })
     if(res.status !== 201) return/*early error*/;
     return res;
   }

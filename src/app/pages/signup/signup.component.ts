@@ -17,6 +17,15 @@ export class SignupComponent {
   router = inject(Router)
   modal = inject(ModalsServicesService)
 
+  shownPassword: boolean = false;
+  showPassword(){
+    this.shownPassword = !this.shownPassword;
+    const passwordInput = document.getElementById('input-password') as HTMLInputElement;
+    if (passwordInput) {
+      passwordInput.type = this.shownPassword ? 'text' : 'password';
+    }
+  }
+
   async signUp(signUpForm: NgForm){
     
     const {username, nombre, apellido, password/*, confirmPassword*/} = signUpForm.value;

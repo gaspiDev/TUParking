@@ -7,7 +7,7 @@
 }
 
 .container-signup{
-height: 80%;
+height: 60%;
 width: 35%;
 display: flex;
 flex-direction: column;
@@ -93,6 +93,15 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 2px 2px #0e58c6;
   }
 }
+.password-show-hide{  
+  position: relative;
+}
+.btn-show-hide{
+  background: none;
+  position: absolute;
+  bottom: -43px;
+  right: 7px;
+}
 
 .btn-signup{
   border-radius: 2px;
@@ -102,6 +111,15 @@ box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
   &:active{
     background-color: #7c8cc6;
+  }
+  &:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    background-color: #f1f1f1;
+    color: #000;
+    &:hover {
+      background-color: #7c8cc6;
+    }
   }
 }
 

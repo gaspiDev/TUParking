@@ -14,15 +14,15 @@
             <tbody>
               @for (spot of this.parkingServices.spots; track spot.id) {
                 <tr>
-                  <td><div class="centered-td">{{spot.id}}</div></td>
-                  <td><div class="centered-td"><div [ngClass]="{'available': spot.deshabilitada, 'occupied': !spot.deshabilitada}">{{spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
+                  <td><div class="centered-td">{{spot.descripcion}}</div></td>
+                  <td><div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'occupied': spot.deshabilitada}">{{!spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
                   <td><div class="centered-td">12:00</div></td>
                   <td><div class="centered-td">
-                    @if (!spot.deshabilitada)
+                    @if (spot.deshabilitada == 0)
                     {
-                      <button class="actions-btn" (click)="occupyParkingState(spot.id)">Occupy</button>
+                      <button class="actions-btn" (click)="setSpotOccupy(spot.id)">Occupy</button>
                     } @else {
-                      <button class="actions-btn" (click)="setFreeParkingState(spot.id)">Release</button>
+                      <button class="actions-btn" (click)="setSpotFree(spot.id)">Release</button>
                     }
                     @if(this.parkingServices.authService.usuario?.isAdmin)
                     {
