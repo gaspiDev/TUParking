@@ -16,7 +16,7 @@
                 <tr>
                   <td><div class="centered-td">{{spot.descripcion}}</div></td>
                   <td><div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'occupied': spot.deshabilitada}">{{!spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
-                  <td><div class="centered-td">12:00</div></td>
+                  <td><div class="centered-td"></div></td>
                   <td><div class="centered-td">
                     @if (spot.deshabilitada == 0)
                     {
@@ -39,7 +39,7 @@
       @if(this.parkingServices.authService.usuario?.isAdmin)
       {
         <div class="btn-container">
-          <button class="btn-admin" (click)="addNewSpot()">Add New</button>
+          <button class="btn-admin" (click)="addNewSpot()">Add New Spot</button>
         </div>
       }
       } @else {
@@ -60,7 +60,7 @@
         </table>
         @if(this.parkingServices.authService.usuario?.isAdmin)
         {
-          <button class="btn-admin" (click)="addNewSpot()" >Add New</button>
+          <button class="btn-admin" (click)="addNewSpot()" >Add New Spot</button>
         }
       }
   </main>

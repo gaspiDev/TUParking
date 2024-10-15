@@ -10,11 +10,11 @@
     <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="input-field">
         <label class="label-signin">Username</label>
-        <input required id='input-username' name="username" class="input-signin" type="text" placeholder="employe1234" ngModel required>
+        <input required id='input-username' name="username" class="input-signin" type="text" placeholder="employee1234" ngModel required>
       </div>
       <div class="input-field">
         <div class="password-show-hide">
-            <label class="label-signin">Password</label><button class="btn-show-hide" type="button" (click)="showPassword()">@if (shownPassword){<img  src="./images/eye-open.svg" alt="">}@else {<img  src="./images/eye-closed.svg" alt="">}</button>
+            <label class="label-signin">Password</label><button tabindex="-1" class="btn-show-hide" type="button" (click)="showPassword()">@if (shownPassword){<img  src="./images/eye-open.svg" alt="">}@else {<img  src="./images/eye-closed.svg" alt="">}</button>
         </div>
         <input id="input-password" name="password" class="input-signin" type="password" placeholder="********" ngModel required>
       </div>

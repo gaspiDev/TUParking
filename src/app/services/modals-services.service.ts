@@ -61,12 +61,16 @@ export class ModalsServicesService {
   modalAddSpot(): Promise<NewSpot | null> {
     return Swal.fire({
       title: 'Add a New Spot',
-      input: 'text',
-      inputLabel: 'Spot Floor and Number',
-      inputPlaceholder: 'A01, B02 ...',
-      showCancelButton: true,
-      confirmButtonText: 'Submit',
-      cancelButtonText: 'Cancel',
+    background: '#1c2833', // Dark background similar to the image
+    color: '#f2f2f2', // Light text color
+    input: 'text',
+    inputLabel: 'Spot Floor and Number',
+    inputPlaceholder: 'A01, B02 ...',
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#28a745',  // Green for confirm button
+    cancelButtonColor: '#dc3545',   // Red for cancel button
     }).then((result) => {
       if (result.isConfirmed) {
         const descripcion = result.value;
