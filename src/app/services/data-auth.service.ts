@@ -24,11 +24,15 @@ export class DataAuthService {
     if(res.status !== 200) return/*early error*/;
     const resJson:ResLogin = await res.json();
     if(!resJson.token) return/*early error*/;
+    
     this.usuario = {
       username: loginData.username,
       token: resJson.token,
       isAdmin: resJson.isAdmin
-    }
+    };
+
+    localStorage.setItem("authToken", resJson.token)
+
     return resJson;
   }
   

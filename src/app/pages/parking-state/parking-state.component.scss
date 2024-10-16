@@ -73,7 +73,7 @@ main{
   background: #3b82f6;
   color: white;
   border: none;
-  width: 85px;
+  width: 55px;
   height: 35px;
   border-radius: 4px;
   cursor: pointer;
@@ -84,8 +84,6 @@ main{
   background: #3b82f6;
   color: white;
   border: none;
-  width: 40px;
-  height: 35px;
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -118,7 +116,7 @@ main{
 
 .centered-td{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -196,7 +194,8 @@ main{
 }
 
 .actions-btn{
-  margin-right: 20px;
+  height: 35px;
+  width: 90px;
 }
 
 .swal2-dark-popup {

@@ -18,14 +18,19 @@
                   <td><div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'occupied': spot.deshabilitada}">{{!spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
                   <td><div class="centered-td"></div></td>
                   <td><div class="centered-td">
-                    @if (spot.deshabilitada == 0)
-                    {
-                      <button class="actions-btn" (click)="setSpotOccupy(spot.id)">Occupy</button>
+                    @if (!spot.estacionamiento){
+                      <button><img src=".\images\car-in.svg" alt="Entra Auto"></button>
                     } @else {
-                      <button class="actions-btn" (click)="setSpotFree(spot.id)">Release</button>
+                      <button><img src=".\images\car-out.svg" alt="Sale Auto"></button>
                     }
                     @if(this.parkingServices.authService.usuario?.isAdmin)
                     {
+                      @if (spot.deshabilitada == 0)
+                      {
+                        <button class="actions-btn" (click)="setSpotOccupy(spot.id)">Occupy</button>
+                      } @else {
+                        <button class="actions-btn" (click)="setSpotFree(spot.id)">Release</button>
+                      }
                       <button class="btn-deleteThat" (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
                         delete
                         </span></button>
