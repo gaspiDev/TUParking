@@ -1,11 +1,8 @@
-<div class="page-signin">
+<main>
   <div class="container-signin">
     <div class="login-header">
-      <h2 class="h2-signin">Log In</h2>
-      <div class="logo-app-name">
-        <img class="logo" src=".\images\tuparking-logo.svg" alt="logo">
-        <p class="p-app-name">TUParking Management</p>
-      </div>
+      <h2 class="h2-signin">Sign In</h2>
+      <img src=".\images\tuparking-logotype.svg" alt="logo">
     </div>
     <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="input-field">
@@ -25,4 +22,4 @@
       <a class="a-signup" [routerLink]="['/signup']">Sign Up</a>
     </div>
   </div>
-</div>
+</main>

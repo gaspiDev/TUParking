@@ -2,10 +2,7 @@
   <div class="container-signup">
     <div class="signup-header">
       <h2 class="h2-signup">Sign Up</h2>
-      <div class="logo-app-name">
-        <img class="logo" src=".\images\tuparking-logo.svg" alt="logo">
-        <p class="p-app-name">TUParking Management</p>
-      </div>
+      <img src=".\images\tuparking-logotype.svg" alt="logo">
     </div>
     <form #signUpForm="ngForm" class="form-signup" (ngSubmit)="signUp(signUpForm)">
       <div class="input-field">
@@ -26,15 +23,11 @@
         </div>
         <input id="input-password" name="password" class="input-signup" type="password" placeholder="********" ngModel required>
       </div>
-      <!-- <div class="input-field">
-        <label class="label-signup">Confirm Password</label>
-        <input class="input-signup" type="password" placeholder="********" name="confirmPassword" ngModel>
-      </div> -->
-        <button [disabled]="signUpForm.invalid" class="btn-signup" type="submit">Sign Up</button>
+      <button [disabled]="signUpForm.invalid" class="btn-signup" type="submit">Sign Up</button>
     </form>
     <div class="container-login">
       <p class="p-login">Already have an account?</p>
-      <a class="a-login" [routerLink]="['/login']">Log In</a>
+      <a class="a-login" [routerLink]="['/login']">Sign In</a>
     </div>
   </div>
 </div>

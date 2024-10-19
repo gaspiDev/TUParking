@@ -8,8 +8,14 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { PricesComponent } from './pages/prices/prices.component';
 import { onlyAdminGuard } from './guards/only-admin.guard';
 import { onlyLoggedGuard } from './guards/only-logged.guard';
+import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
+  {
+    path: "landing",
+    component: LandingComponent,
+    title: "Welcome to TUParling!"
+  },
   {
     path: "login",
     component: LoginComponent,
@@ -51,7 +57,7 @@ export const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "login",
+    redirectTo: "landing",
     pathMatch: "full"
   },
   {
