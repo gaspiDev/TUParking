@@ -9,22 +9,26 @@ import { PricesComponent } from './pages/prices/prices.component';
 import { onlyAdminGuard } from './guards/only-admin.guard';
 import { onlyLoggedGuard } from './guards/only-logged.guard';
 import { LandingComponent } from './pages/landing/landing.component';
+import { onlyNonLoggedGuard } from './guards/onlyNonLoggedGuard';
 
 export const routes: Routes = [
   {
     path: "landing",
     component: LandingComponent,
-    title: "Welcome to TUParling!"
+    title: "Welcome to TUParling!",
+    canActivate: [onlyNonLoggedGuard],
   },
   {
     path: "login",
     component: LoginComponent,
-    title: "TUParking Login"
+    title: "TUParking Login",
+    canActivate: [onlyNonLoggedGuard],
   },
   {
     path: "signup",
     component: SignupComponent,
-    title: "TUParking SignUp"
+    title: "TUParking SignUp",
+    canActivate: [onlyNonLoggedGuard],
   },
   {
     path: "app",

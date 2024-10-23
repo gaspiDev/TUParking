@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
-<div class="page-parking-state">
     <main>
       @if (this.parkingServices.spots.length !== 0){
           <table class="styled-table">
@@ -8,32 +7,45 @@
                 <th>{{tableHeader.c1}}</th>
                 <th>{{tableHeader.c2}}</th>
                 <th>{{tableHeader.c3}}</th>
-                <th>{{tableHeader.c4}}</th>
               </tr>
             </thead>
             <tbody>
-              @for (spot of this.parkingServices.spots; track spot.id) {
+              @for (spot of parkingServices.spots; track spot.id) {
                 <tr>
                   <td><div class="centered-td">{{spot.descripcion}}</div></td>
-                  <td><div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'occupied': spot.deshabilitada}">{{!spot.deshabilitada ? 'Available' : 'Occupied'}}</div></div></td>
-                  <td><div class="centered-td"></div></td>
-                  <td><div class="centered-td">
-                    @if (!spot.estacionamiento){
-                      <button><img src=".\images\car-in.svg" alt="Entra Auto"></button>
-                    } @else {
-                      <button><img src=".\images\car-out.svg" alt="Sale Auto"></button>
+                  <td>
+                    <div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'unavailable': spot.deshabilitada, 'plate-number': !spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)}">
+                      @if (spot.deshabilitada){
+                        Unavailable
+                      } @else if (!spot.deshabilitada && (spot.estacionamiento?.horaIngreso && spot.estacionamiento?.horaEgreso)){
+                        Available
+                      } @else if (!spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)){
+                        {{spot.estacionamiento?.patente}}
+                      } @else {
+                        Available
+                      }
+                    </div></div></td>
+                  <td><div class="centered-td-btns">
+                    @if (!spot.deshabilitada){
+                      @if (spot.estacionamiento?.horaIngreso !== null && spot.estacionamiento?.horaEgreso == null){
+                        <button onclick="closeParking(spot.id)" class="emp-btn">Exit<img src=".\images\car-out.svg" alt="Sale Auto"></button>
+                      } @else{
+                        <button (click)="openParking(spot.id)" class="emp-btn">Entry<img src=".\images\car-in.svg" alt="Entra Auto"></button>
+                      }
                     }
                     @if(this.parkingServices.authService.usuario?.isAdmin)
                     {
-                      @if (spot.deshabilitada == 0)
-                      {
-                        <button class="actions-btn" (click)="setSpotOccupy(spot.id)">Occupy</button>
-                      } @else {
-                        <button class="actions-btn" (click)="setSpotFree(spot.id)">Release</button>
-                      }
-                      <button class="btn-deleteThat" (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
-                        delete
-                        </span></button>
+                      <div class="admin-btns">
+                        @if (spot.deshabilitada == 0)
+                        {
+                          <button (click)="disableSpot(spot.id)">Disable</button>
+                        } @else {
+                          <button (click)="enableSpot(spot.id)">Enable</button>
+                        }
+                        <button class="btn-deleteThat" (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
+                          delete
+                          </span></button>
+                      </div>
                     }
                   </div>
                   </td>
@@ -54,7 +66,6 @@
               <th>{{tableHeader.c1}}</th>
               <th>{{tableHeader.c2}}</th>
               <th>{{tableHeader.c3}}</th>
-              <th>{{tableHeader.c4}}</th>
             </tr>
           </thead>
           <tbody>
@@ -69,4 +80,3 @@
         }
       }
   </main>
-  </div>

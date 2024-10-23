@@ -8,7 +8,18 @@ import { SignUp } from '../Interfaces/signUp';
 })
 export class DataAuthService {
 
-  constructor() { }
+  constructor() { 
+    const token = localStorage.getItem("authToken")
+    if (token){
+      this.usuario = {
+        username: "",
+        token: token,
+        isAdmin: Number(localStorage.getItem("role")) 
+      }
+    } else {
+      this.usuario = undefined;
+    }
+  }
 
   usuario: User | undefined;
 
@@ -32,7 +43,8 @@ export class DataAuthService {
     };
 
     localStorage.setItem("authToken", resJson.token)
-
+    localStorage.setItem("role", JSON.stringify(resJson.isAdmin ? 1 : 0))
+  
     return resJson;
   }
   

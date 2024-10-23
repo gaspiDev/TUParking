@@ -17,15 +17,7 @@ export class LoginComponent {
   authService = inject(DataAuthService)
   router = inject(Router)
 
-  shownPassword: boolean = false;
-  showPassword(){
-    this.shownPassword = !this.shownPassword;
-    const passwordInput = document.getElementById('input-password') as HTMLInputElement;
-    if (passwordInput) {
-      passwordInput.type = this.shownPassword ? 'text' : 'password';
-    }
-  }
-
+  
   async login(loginForm: NgForm){
     const {username, password} = loginForm.value;
     const loginData: Login = {username, password};
@@ -36,5 +28,13 @@ export class LoginComponent {
       this.modal.modalLoginFailed()
     }
   }
-
+  
+  shownPassword: boolean = false;
+  showPassword(){
+    this.shownPassword = !this.shownPassword;
+    const passwordInput = document.getElementById('input-password') as HTMLInputElement;
+    if (passwordInput) {
+      passwordInput.type = this.shownPassword ? 'text' : 'password';
+    }
+  }
 }

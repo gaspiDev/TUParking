@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalsServicesService } from '../../services/modals-services.service';
 import { ParkingServicesService } from '../../services/parking-service.service';
+import { OpenParking } from '../../Interfaces/openParking';
+import { DataAuthService } from '../../services/data-auth.service';
 
 
 @Component({
@@ -15,29 +17,29 @@ import { ParkingServicesService } from '../../services/parking-service.service';
 export class ParkingStateComponent {
  modalServices = inject(ModalsServicesService)
  parkingServices = inject(ParkingServicesService)
+ dataAuthServices = inject(DataAuthService)
 
   tableHeader = {
     c1: 'Spot Number',
     c2: 'Availability',
-    c3: 'Ingress Time',
-    c4: 'Actions'
+    c3: 'Actions'
   }
   
-  async setSpotOccupy(id: number){
-    await this.parkingServices.setSpotOccupy(id);
-    this.parkingServices.getSpots();
+  async disableSpot(id: number){
+    await this.parkingServices.setSpotDisable(id);
+    this.parkingServices.loadData();
   }
   
-  async setSpotFree(id: number){
-    await this.parkingServices.setSpotFree(id);
-    this.parkingServices.getSpots();
+  async enableSpot(id: number){
+    await this.parkingServices.setSpotEnable(id);
+    this.parkingServices.loadData();
   }
   
   async addNewSpot(){
     const modal = await this.modalServices.modalAddSpot();
     if(modal !== null){
       await this.parkingServices.addNewSpot(modal);
-      this.parkingServices.getSpots();
+      this.parkingServices.loadData();
     }
   }
   
@@ -45,8 +47,32 @@ export class ParkingStateComponent {
     const modal = await this.modalServices.modalDelete();
     if(modal !== null){
      await this.parkingServices.deleteThatSpot(id);
-     this.parkingServices.getSpots();
+     this.parkingServices.loadData();
    }
+  }
+
+  async closeParking(id: number){
+    
+  }
+
+  async openParking(id: number){
+    let patente: string = "";
+    const modal = await this.modalServices.openParkingModal();
+    if (modal !== null){
+      patente = modal;
+    } else {
+      return;
+    }
+    const idCochera: number = id;
+    let username: string = "";
+    if (this.dataAuthServices.usuario?.isAdmin == 1){
+      username = "ADMIN"
+    } else {
+      username= "EMPLOYEE"
+    }
+    const openedParking: OpenParking = { patente, idCochera, username }
+    await this.parkingServices.openParking(openedParking);
+    this.parkingServices.loadData();
   }
 }
 

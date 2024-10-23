@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { NewSpot } from '../Interfaces/newSpot';
 
 @Injectable({
   providedIn: 'root'
@@ -58,24 +57,23 @@ export class ModalsServicesService {
       buttonsStyling: true})
   }
 
-  modalAddSpot(): Promise<NewSpot | null> {
+  modalAddSpot(): Promise<string | null> {
     return Swal.fire({
       title: 'Add a New Spot',
-    background: '#1c2833', // Dark background similar to the image
-    color: '#f2f2f2', // Light text color
-    input: 'text',
-    inputLabel: 'Spot Floor and Number',
-    inputPlaceholder: 'A01, B02 ...',
-    showCancelButton: true,
-    confirmButtonText: 'Submit',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#28a745',  // Green for confirm button
-    cancelButtonColor: '#dc3545',   // Red for cancel button
+      background: '#1c2833',
+      color: '#f2f2f2', 
+      input: 'text',
+      inputLabel: 'Spot Floor and Number',
+      inputPlaceholder: 'A01, B02 ...',
+      showCancelButton: true,
+      confirmButtonText: 'Add',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
     }).then((result) => {
       if (result.isConfirmed) {
-        const descripcion = result.value;
-        const newSpot: NewSpot = {descripcion};
-        return newSpot;
+        const descripcion: string = result.value;
+        return descripcion;
       } else {
         return null;
       }
@@ -114,5 +112,28 @@ export class ModalsServicesService {
       showCancelButton: true,
       buttonsStyling: true
     })  
+  }
+
+  openParkingModal(): Promise<string | null> {
+    return Swal.fire({
+      title: 'Start a Parking',
+    background: '#1c2833',
+    color: '#f2f2f2',
+    input: 'text',
+    inputLabel: 'Plate Number',
+    inputPlaceholder: 'ABC 123, CBA 321...',
+    showCancelButton: true,
+    confirmButtonText: 'Start',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#28a745',
+    cancelButtonColor: '#dc3545',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const patente: string = result.value;
+        return patente;
+      } else {
+        return null;
+      }
+    });
   }
   }

@@ -1,39 +1,71 @@
 import { inject, Injectable } from '@angular/core';
 import { Spot } from '../Interfaces/spot';
 import { DataAuthService } from './data-auth.service';
-import { NewSpot } from '../Interfaces/newSpot';
+import { Parking } from '../Interfaces/parking';
+import { OpenParking } from '../Interfaces/openParking';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParkingServicesService {
-  constructor() {
-    this.getSpots();
-  }
   spots:  Spot[] = [];
-
+  parkings:  Parking[] = [];
   authService = inject(DataAuthService);
   
+  constructor() {
+    this.loadData();
+  }
+  
+  async loadData() {
+    await this.getSpots()
+    await this.getParkings()
+    this.linkParkingWithSpot()
+  }
+
   async getSpots(){
     const res = await fetch('http://localhost:5000/cocheras',{
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        authorization: 'Bearer ' + this.authService.usuario?.token
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
       }
     }
     );
-    this.spots = await res.json();
+    if(res.status !== 200) return;
+    const resJson:Spot[] = await res.json();
+    this.spots = resJson;
+  }
+
+  async getParkings(){
+    const res = await fetch('http://localhost:5000/estacionamientos',{
+      method: 'GET',
+      headers: {
+        authorization:'Bearer '+ localStorage.getItem("authToken")
+      },
+    })
+    if(res.status !== 200) return;
+    const resJson: Parking[] = await res.json();
+    this.parkings = resJson;
+    console.log(this.parkings);
+  }
+
+  linkParkingWithSpot() {
+    this.spots = this.spots.map(cochera => {
+      const estacionamiento = this.parkings.find(e => e.idCochera === cochera.id)
+      return {...cochera, estacionamiento}
+    });
+    console.log(this.spots)
   }
  
-  async addNewSpot(newSpotDescription: NewSpot){
+  async addNewSpot(newSpotDescription: string){
+    const newSpot = {"descripcion" : newSpotDescription};
     const res = await fetch('http://localhost:5000/cocheras', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        authorization: 'Bearer ' + this.authService.usuario?.token
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
       },
-      body: JSON.stringify(newSpotDescription)
+      body: JSON.stringify(newSpot)
     })
     if(res.status !== 201) return/*early error*/;
     return res;
@@ -45,37 +77,50 @@ export class ParkingServicesService {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json',
-        authorization: 'Bearer ' + this.authService.usuario?.token
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
       }
     })
     if(res.status !== 201) return/*early error*/;
     return res;
   }
 
-  async setSpotFree(id: number){
+  async setSpotEnable(id: number){
     const url = `http://localhost:5000/cocheras/${id}/enable`;
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        authorization: 'Bearer ' + this.authService.usuario?.token
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
       }
     })
     if(res.status !== 201) return/*early error*/;
     return res;
   }
 
-  async setSpotOccupy(id: number){
+  async setSpotDisable(id: number){
     const url = `http://localhost:5000/cocheras/${id}/disable`;
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        authorization: 'Bearer ' + this.authService.usuario?.token 
+        authorization: 'Bearer ' + localStorage.getItem("authToken") 
     }
   })
     if(res.status !== 201) return/*early error*/;
     return res;
   }
 
-}
+  async openParking(openedParking: OpenParking){
+    const url = `http://localhost:5000/estacionamientos/abrir`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
+      },
+      body: JSON.stringify(openedParking)
+  })
+    if(res.status !== 201) return/*early error*/;
+    return res;
+  }
+  }

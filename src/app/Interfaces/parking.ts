@@ -7,5 +7,5 @@ export interface Parking{
   idUsuarioIngreso: string,
   idUsuarioEgreso: string,
   idCochera: number,
-  eliminado: boolean | null
+  eliminado: number | null
 }
