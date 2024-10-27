@@ -5,6 +5,7 @@ import { ModalsServicesService } from '../../services/modals-services.service';
 import { ParkingServicesService } from '../../services/parking-service.service';
 import { OpenParking } from '../../Interfaces/openParking';
 import { DataAuthService } from '../../services/data-auth.service';
+import { CloseParking } from '../../Interfaces/closeParking';
 
 
 @Component({
@@ -51,10 +52,7 @@ export class ParkingStateComponent {
    }
   }
 
-  async closeParking(id: number){
-    
-  }
-
+  
   async openParking(id: number){
     let patente: string = "";
     const modal = await this.modalServices.openParkingModal();
@@ -64,15 +62,28 @@ export class ParkingStateComponent {
       return;
     }
     const idCochera: number = id;
-    let username: string = "";
-    if (this.dataAuthServices.usuario?.isAdmin == 1){
-      username = "ADMIN"
-    } else {
-      username= "EMPLOYEE"
-    }
-    const openedParking: OpenParking = { patente, idCochera, username }
+    const idUsuarioIngreso = "ADMIN"
+    const openedParking: OpenParking = {patente, idUsuarioIngreso, idCochera}
     await this.parkingServices.openParking(openedParking);
     this.parkingServices.loadData();
+  }
+  
+  async closeParking(patente: string, idUsuarioEgreso: string){
+    const closeParking:CloseParking = { patente, idUsuarioEgreso}
+    await this.parkingServices.closeParking(closeParking);
+    await this.parkingServices.loadData();
+    const price: number | undefined = this.parkingServices.parkings.find(parking => parking.patente === patente)?.costo;
+    this.modalServices.closeParkingModal(price);
+  }
+
+  visibleTooltipIndex: number | null = null;
+
+  toggleTooltip(id: number) {
+      if (this.visibleTooltipIndex === id) {
+        this.visibleTooltipIndex = null;
+      } else {
+        this.visibleTooltipIndex = id;
+      }
   }
 }
 

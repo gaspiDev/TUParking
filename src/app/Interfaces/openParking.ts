@@ -1,5 +1,5 @@
 export interface OpenParking{
   patente: string,
-  username: string,
+  idUsuarioIngreso: string,
   idCochera: number
 }

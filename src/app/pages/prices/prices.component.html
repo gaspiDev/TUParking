@@ -1,1 +1,22 @@
-<div style="color:whitesmoke; background-color: green;display: flex; justify-content: center; padding: 10px;font-weight: bold;">PRICES WORKS</div>
+<main>
+  <div class="prices-container">
+    <h2>Parking Fees</h2>
+    @for (fee of pricesService.Fees; track fee.id){
+      <div class="fee-conatiner">
+        <p>
+          @if (fee.id == "MEDIAHORA") {
+            <= 30 min
+          } @else if (fee.id == "PRIMERAHORA"){
+            <= 60 min
+          } @else{
+            > 60 min * Hs
+          }
+        </p>
+        <div>
+          <p>${{fee.valor}},00</p>
+          <button (click)="editPrice(fee.id)"><img src="./images/edit.svg" alt="edit fee"></button>
+        </div>
+      </div>
+    }
+  </div>
+</main>

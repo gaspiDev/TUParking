@@ -1,82 +1,75 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
     <main>
       @if (this.parkingServices.spots.length !== 0){
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>{{tableHeader.c1}}</th>
-                <th>{{tableHeader.c2}}</th>
-                <th>{{tableHeader.c3}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (spot of parkingServices.spots; track spot.id) {
-                <tr>
-                  <td><div class="centered-td">{{spot.descripcion}}</div></td>
-                  <td>
-                    <div class="centered-td"><div [ngClass]="{'available': !spot.deshabilitada, 'unavailable': spot.deshabilitada, 'plate-number': !spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)}">
-                      @if (spot.deshabilitada){
-                        Unavailable
-                      } @else if (!spot.deshabilitada && (spot.estacionamiento?.horaIngreso && spot.estacionamiento?.horaEgreso)){
-                        Available
-                      } @else if (!spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)){
-                        {{spot.estacionamiento?.patente}}
-                      } @else {
-                        Available
+        <div class="parking-container">
+          @for (spot of parkingServices.spots; track spot.id){
+            <div class="parking-card">
+              <div class="spot-header">
+                <h2>{{spot.descripcion}}</h2>
+                <div class="options-container">
+                  <button (click)="toggleTooltip(spot.id)" style="background: none;"><img src="./images/options.svg" alt=""></button>
+                  <div class="tooltip" [ngClass]="{'isTooltipVisible': visibleTooltipIndex === spot.id}">
+                    <button >
+                      @if(this.parkingServices.authService.usuario?.isAdmin)
+                      {
+                        <div>
+                          @if (spot.deshabilitada == 0)
+                          {
+                            <button (click)="disableSpot(spot.id)"><img src="./images/disabled.svg" alt="Enable"></button>
+                          } @else {
+                            <button (click)="enableSpot(spot.id)"><img src="./images/available.svg" alt="Enable"></button>
+                          }
+                        </div>
                       }
-                    </div></div></td>
-                  <td><div class="centered-td-btns">
-                    @if (!spot.deshabilitada){
-                      @if (spot.estacionamiento?.horaIngreso !== null && spot.estacionamiento?.horaEgreso == null){
-                        <button onclick="closeParking(spot.id)" class="emp-btn">Exit<img src=".\images\car-out.svg" alt="Sale Auto"></button>
-                      } @else{
-                        <button (click)="openParking(spot.id)" class="emp-btn">Entry<img src=".\images\car-in.svg" alt="Entra Auto"></button>
-                      }
-                    }
-                    @if(this.parkingServices.authService.usuario?.isAdmin)
-                    {
-                      <div class="admin-btns">
-                        @if (spot.deshabilitada == 0)
-                        {
-                          <button (click)="disableSpot(spot.id)">Disable</button>
-                        } @else {
-                          <button (click)="enableSpot(spot.id)">Enable</button>
-                        }
-                        <button class="btn-deleteThat" (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
-                          delete
-                          </span></button>
-                      </div>
-                    }
+                    </button>
+                    <button ><button (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
+                      delete
+                      </span></button></button>
                   </div>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-      @if(this.parkingServices.authService.usuario?.isAdmin)
-      {
-        <div class="btn-container">
-          <button class="btn-admin" (click)="addNewSpot()">Add Spot</button>
-        </div>
-      }
-      } @else {
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th>{{tableHeader.c1}}</th>
-              <th>{{tableHeader.c2}}</th>
-              <th>{{tableHeader.c3}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="nothing-row" colspan="4"> <p>No Current Parking Spots </p></td>
-            </tr>
-          </tbody>
-        </table>
+                </div>  
+              </div>
+              <div style="display: flex;flex-direction: column;justify-content: space-between; height: 100%; align-items: center;">
+                <div [ngClass]="{'patente': !spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)}">
+                  @if (spot.deshabilitada) {
+                    <img style="width: 122px; height: 122px;" src=".\images\disabled.svg" alt="disabled">
+                  } @else if (!spot.deshabilitada && (!spot.estacionamiento?.horaEgreso && spot.estacionamiento?.horaIngreso)){
+                    <span>ARGENTINA</span>
+                    <div class="plate-number">{{spot.estacionamiento?.patente}}</div>
+                  } @else {
+                    <img style="width: 122px; height: 122px;" src="./images/available.svg" alt="Enable">
+                  }
+                </div>
+                @if (!spot.deshabilitada){
+                    @if (spot.estacionamiento?.horaIngreso !== null && spot.estacionamiento?.horaEgreso == null){
+                      <button class="actions-car" (click)="closeParking(spot.estacionamiento?.patente!, spot.estacionamiento?.idUsuarioIngreso!)">
+                          <span>EXIT</span>
+                          <img src="./images/arrow-exit.svg" alt="exit car">
+                      </button>
+                    } @else{
+                      <button (click)="openParking(spot.id)" class="actions-car">
+                        <img src="./images/arrow-entry.svg" alt="exit car">
+                        <span>ENTRY</span>
+                      </button>
+                    }
+                  }  
+              </div>
+            </div>
+          }
         @if(this.parkingServices.authService.usuario?.isAdmin)
         {
-          <button class="btn-admin" (click)="addNewSpot()" >Add New Spot</button>
+          <div class="parking-card">
+            <button style="margin-top: 100px; background: none;" (click)="addNewSpot()" ><img style="width: 122px; height: 122px;" src="./images/add.svg" alt=""></button>
+          </div>   
         }
+        </div>
+      } @else {
+        <div class="parking-container">
+          @if(this.parkingServices.authService.usuario?.isAdmin)
+        {
+          <div class="parking-card">
+            <button style="margin-top: 100px; background: none;" (click)="addNewSpot()" ><img style="width: 122px; height: 122px;" src="./images/add.svg" alt=""></button>
+          </div>  
+        }
+        </div>
       }
   </main>

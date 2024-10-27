@@ -3,6 +3,7 @@ import { Spot } from '../Interfaces/spot';
 import { DataAuthService } from './data-auth.service';
 import { Parking } from '../Interfaces/parking';
 import { OpenParking } from '../Interfaces/openParking';
+import { CloseParking } from '../Interfaces/closeParking';
 
 @Injectable({
   providedIn: 'root'
@@ -46,15 +47,13 @@ export class ParkingServicesService {
     if(res.status !== 200) return;
     const resJson: Parking[] = await res.json();
     this.parkings = resJson;
-    console.log(this.parkings);
   }
 
   linkParkingWithSpot() {
     this.spots = this.spots.map(cochera => {
-      const estacionamiento = this.parkings.find(e => e.idCochera === cochera.id)
+      const estacionamiento = this.parkings.find(e => e.idCochera === cochera.id && !e.horaEgreso)
       return {...cochera, estacionamiento}
     });
-    console.log(this.spots)
   }
  
   async addNewSpot(newSpotDescription: string){
@@ -119,6 +118,20 @@ export class ParkingServicesService {
         authorization: 'Bearer ' + localStorage.getItem("authToken")
       },
       body: JSON.stringify(openedParking)
+  })
+    if(res.status !== 201) return/*early error*/;
+    return res;
+  }
+
+  async closeParking(closedParking: CloseParking){
+    const url = `http://localhost:5000/estacionamientos/cerrar`;
+    const res = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
+      },
+      body: JSON.stringify(closedParking)
   })
     if(res.status !== 201) return/*early error*/;
     return res;

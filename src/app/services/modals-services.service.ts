@@ -9,8 +9,7 @@ export class ModalsServicesService {
   constructor() { }
   async modalDelete():Promise<true | null>{
     const  modal = await Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'You want to delete this Spot?',
       icon: 'warning',
       iconColor: '#ffcc50',
       background: '#1c2833',
@@ -57,11 +56,11 @@ export class ModalsServicesService {
       buttonsStyling: true})
   }
 
-  modalAddSpot(): Promise<string | null> {
-    return Swal.fire({
+  async modalAddSpot(): Promise<string | null> {
+    const result = await Swal.fire({
       title: 'Add a New Spot',
       background: '#1c2833',
-      color: '#f2f2f2', 
+      color: '#f2f2f2',
       input: 'text',
       inputLabel: 'Spot Floor and Number',
       inputPlaceholder: 'A01, B02 ...',
@@ -70,14 +69,13 @@ export class ModalsServicesService {
       cancelButtonText: 'Cancel',
       confirmButtonColor: '#28a745',
       cancelButtonColor: '#dc3545',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const descripcion: string = result.value;
-        return descripcion;
-      } else {
-        return null;
-      }
     });
+    if (result.isConfirmed) {
+      const descripcion: string = result.value;
+      return descripcion;
+    } else {
+      return null;
+    }
   }
 
   modalSignUpFailed(){
@@ -114,26 +112,69 @@ export class ModalsServicesService {
     })  
   }
 
-  openParkingModal(): Promise<string | null> {
-    return Swal.fire({
+  async openParkingModal(): Promise<string | null> {
+    const result = await Swal.fire({
       title: 'Start a Parking',
-    background: '#1c2833',
-    color: '#f2f2f2',
-    input: 'text',
-    inputLabel: 'Plate Number',
-    inputPlaceholder: 'ABC 123, CBA 321...',
-    showCancelButton: true,
-    confirmButtonText: 'Start',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#28a745',
-    cancelButtonColor: '#dc3545',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const patente: string = result.value;
-        return patente;
-      } else {
+      background: '#1c2833',
+      color: '#f2f2f2',
+      input: 'text',
+      inputLabel: 'Plate Number',
+      inputPlaceholder: 'ABC 123, AD 246 DZ...',
+      showCancelButton: true,
+      confirmButtonText: 'Start',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      inputValidator: (value_1) => {
+        const pattern = /^[A-Z]{3} \d{3}$|^[A-Z]{2} \d{3} [A-Z]{2}$/;
+        if (!pattern.test(value_1)) {
+          return 'Please enter a valid plate number ( ABC 123 or AD 246 DZ )';
+        }
         return null;
       }
     });
+    if (result.isConfirmed) {
+      const patente: string = result.value;
+      return patente;
+    } else {
+      return null;
+    }
   }
+
+  closeParkingModal(price: number | undefined){
+    Swal.fire({
+    title: "Parking Cashed",
+    text: `The total price is $${price}`,
+    background: '#1c2833',
+    color: '#f2f2f2',
+    confirmButtonText: 'Cashed',
+    confirmButtonColor: '#28a745',
+    });
+  }
+
+  async modalEditPrice(): Promise<number | null> {
+    const result = await Swal.fire({
+      title: 'Edit Price',
+      background: '#1c2833',
+      color: '#f2f2f2',
+      input: 'number',
+      inputPlaceholder: 'Enter the new price...',
+      inputAttributes: {
+        min: '0',
+        step: '0.01'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+    });
+    if (result.isConfirmed && result.value !== null) {
+      const newPrice: number = parseFloat(result.value);
+      return newPrice;
+    } else {
+      return null;
+    }
+  }
+
   }
