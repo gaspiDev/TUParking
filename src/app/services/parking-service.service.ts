@@ -41,7 +41,7 @@ export class ParkingServicesService {
     const res = await fetch('http://localhost:5000/estacionamientos',{
       method: 'GET',
       headers: {
-        authorization:'Bearer '+ localStorage.getItem("authToken")
+        authorization: 'Bearer ' + localStorage.getItem("authToken")
       },
     })
     if(res.status !== 200) return;
@@ -51,7 +51,7 @@ export class ParkingServicesService {
 
   linkParkingWithSpot() {
     this.spots = this.spots.map(cochera => {
-      const estacionamiento = this.parkings.find(e => e.idCochera === cochera.id && !e.horaEgreso)
+      const estacionamiento = this.parkings.find(e => e.idCochera === cochera.id && e.costo == null)
       return {...cochera, estacionamiento}
     });
   }

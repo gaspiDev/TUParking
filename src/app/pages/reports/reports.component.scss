@@ -1,0 +1,45 @@
+main{
+  padding: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse:collapse;
+  font-family: Arial, sans-serif;
+  border-radius: 30px;
+}
+
+
+table thead td {
+  background-color: #e0f7ff;
+  color: #0077a3;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 2px solid #a3d0e5;
+}
+
+
+table tbody tr {
+  background-color: #f4fbff;
+  color: #333;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: #e8f3f7;
+}
+
+
+table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #a3d0e5;
+}
+
+table td:empty {
+  color: #999;
+}
+
+
+table tbody tr:hover {
+  background-color: #d1effa
+}

@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { ParkingServicesService } from './parking-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,9 @@ import Swal from 'sweetalert2';
 export class ModalsServicesService {
 
   constructor() { }
+
+  parkingService = inject(ParkingServicesService)
+
   async modalDelete():Promise<true | null>{
     const  modal = await Swal.fire({
       title: 'You want to delete this Spot?',
@@ -125,10 +129,12 @@ export class ModalsServicesService {
       cancelButtonText: 'Cancel',
       confirmButtonColor: '#28a745',
       cancelButtonColor: '#dc3545',
-      inputValidator: (value_1) => {
+      inputValidator: (result) => {
         const pattern = /^[A-Z]{3} \d{3}$|^[A-Z]{2} \d{3} [A-Z]{2}$/;
-        if (!pattern.test(value_1)) {
+        if (!pattern.test(result)) {
           return 'Please enter a valid plate number ( ABC 123 or AD 246 DZ )';
+        } else if (this.parkingService.spots.find(s => s.estacionamiento?.patente == result)){
+          return 'The plate number already exists'
         }
         return null;
       }
@@ -144,7 +150,7 @@ export class ModalsServicesService {
   closeParkingModal(price: number | undefined){
     Swal.fire({
     title: "Parking Cashed",
-    text: `The total price is $${price}`,
+    text: `The total price is $${price?.toPrecision(6)}`,
     background: '#1c2833',
     color: '#f2f2f2',
     confirmButtonText: 'Cashed',

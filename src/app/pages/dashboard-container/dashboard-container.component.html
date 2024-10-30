@@ -1,18 +1,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
 <header>
   <img src=".\images\tuparking-logotype.svg" alt="logo">
-  <nav>
-    <a [routerLink]="['/app/parking-state']" routerLinkActive="my-link" >Parking State</a>
-    @if (this.dataAuthService.usuario?.isAdmin)
-    {
-      <a [routerLink]="['/app/reports']" routerLinkActive="my-link" >Reports</a>
-      <a [routerLink]="['/app/prices']" routerLinkActive="my-link" >Prices</a>
+  <button class="menu-toggle" (click)="toggleNavbar()">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <nav [ngClass]="{'navbar': true, 'open': navbarOpen}">
+    <a [routerLink]="['/app/parking-state']" routerLinkActive="my-link">Parking State</a>
+    @if (dataAuthService.usuario?.isAdmin){
+      <a [routerLink]="['/app/reports']" routerLinkActive="my-link">Reports</a>
+      <a [routerLink]="['/app/prices']" routerLinkActive="my-link">Prices</a>
     }
-    <button class="button-icon" (click)="closeSession()">
-      <span class="material-symbols-outlined">
-        account_box
-      </span>
-    </button>
   </nav>
+  <button class="button-icon" (click)="closeSession()">
+    <span class="material-symbols-outlined">account_box</span>
+  </button>
 </header>
 <router-outlet />

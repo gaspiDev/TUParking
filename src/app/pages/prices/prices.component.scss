@@ -2,56 +2,75 @@ main{
   height: 80vh;
   padding-top: 120px;
 }
-h2{
-  color: #f1f1f1;
-  font-size: 3rem;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.582);
+
+.prices-container {
+  background-color: #f4fbff; /* Light blue background */
+  padding: 20px;
+  border-radius: 8px;
+  width: 550px;
+  height: 350px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Header */
+.prices-container h2 {
+  color: #0077a3; /* Darker blue */
   text-align: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* Fee container */
+.fee-conatiner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background-color: #e8f3f7; /* Light blue for individual fees */
+  border: 1px solid #a3d0e5; /* Border for separation */
+  border-radius: 6px;
   margin-bottom: 10px;
 }
 
-.prices-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background: linear-gradient(180deg, #2a4772 0%, #1e3655 100%);
-  border-radius: 30px;
-  width: 60%;
-  height: 40%;
-  justify-self: center;
-  padding: 0px 60px 60px 60px;
-  border: 2px solid #f1f1f1;
-  box-shadow: 0px 4px 8px 0px #000;
+/* Fee description */
+.fee-conatiner p {
+  font-size: 1.25rem;
+  color: #555;
 }
 
-
-.fee-conatiner{
+/* Price and edit button container */
+.fee-conatiner div {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  background: none;
-  color: #f1f1f1;
-  width: 60%;
-  border-bottom: 1px solid #f1f1f1;
-  p{
-    font-size: 1.75rem ;
-    text-align: center;
-  }
-  div{
-    font-size: 1.75rem ;
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-    justify-content: space-between;
-    gap: 30px;
-    button{
-      background: none;
-      img:hover{
-        color: #162436;
-      }
-    }
-  }
+}
+
+/* Price styling */
+.fee-conatiner div p {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #0077a3; /* Darker blue for price */
+  margin-right: 10px;
+}
+
+/* Edit button */
+.fee-conatiner button {
+  background-color: #53a9ff; /* Soft blue for button */
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.fee-conatiner button:hover {
+  background-color: #b3e0f2; /* Darker blue on hover */
+}
+
+/* Edit icon */
+.fee-conatiner button img {
+  width: 20px;
+  height: 20px;
 }
