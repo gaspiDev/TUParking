@@ -6,12 +6,12 @@
             <div class="parking-card">
               <div class="spot-header">
                 <h2>{{spot.descripcion}}</h2>
+                @if(this.parkingServices.authService.usuario?.isAdmin)
+                {
                 <div class="options-container">
                   <button (click)="toggleTooltip(spot.id)" style="background: none;"><img src="./images/options.svg" alt=""></button>
                   <div class="tooltip" [ngClass]="{'isTooltipVisible': visibleTooltipIndex === spot.id}">
                     <button >
-                      @if(this.parkingServices.authService.usuario?.isAdmin)
-                      {
                         <div>
                           @if (spot.deshabilitada == 0)
                           {
@@ -20,13 +20,13 @@
                             <button (click)="enableSpot(spot.id)"><img src="./images/available.svg" alt="Enable"></button>
                           }
                         </div>
-                      }
-                    </button>
-                    <button ><button (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
-                      delete
-                      </span></button></button>
-                  </div>
-                </div>  
+                        <button ><button (click)="deleteThatSpot(spot.id)"><span class="material-symbols-outlined">
+                          delete
+                          </span></button></button>
+                        </button>
+                      </div>
+                    </div>  
+                  }
               </div>
               <div style="display: flex;flex-direction: column;justify-content: space-between; height: 100%; align-items: center;">
                 <div [ngClass]="{'patente': !spot.deshabilitada && (spot.estacionamiento?.horaIngreso && !spot.estacionamiento?.horaEgreso)}">

@@ -4,6 +4,7 @@ import { DataAuthService } from './data-auth.service';
 import { Parking } from '../Interfaces/parking';
 import { OpenParking } from '../Interfaces/openParking';
 import { CloseParking } from '../Interfaces/closeParking';
+import { ReportsService } from './reports.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ParkingServicesService {
   spots:  Spot[] = [];
   parkings:  Parking[] = [];
   authService = inject(DataAuthService);
+  reportsService = inject(ReportsService)
   
   constructor() {
     this.loadData();
@@ -21,6 +23,7 @@ export class ParkingServicesService {
     await this.getSpots()
     await this.getParkings()
     this.linkParkingWithSpot()
+    this.reportsService.getLastParkings();
   }
 
   async getSpots(){

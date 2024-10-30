@@ -18,7 +18,6 @@ import { CloseParking } from '../../Interfaces/closeParking';
 export class ParkingStateComponent {
  modalServices = inject(ModalsServicesService)
  parkingServices = inject(ParkingServicesService)
- dataAuthServices = inject(DataAuthService)
 
   tableHeader = {
     c1: 'Spot Number',

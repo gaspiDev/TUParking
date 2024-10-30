@@ -9,10 +9,10 @@ import { SignUp } from '../Interfaces/signUp';
 export class DataAuthService {
 
   constructor() { 
-    const token = localStorage.getItem("authToken")
+    const token = this.getTokenLH();
     if (token){
       this.usuario = {
-        username: "",
+        username: this.usuario?.username!,
         token: token,
         isAdmin: Number(localStorage.getItem("role")) 
       }
@@ -46,6 +46,10 @@ export class DataAuthService {
     localStorage.setItem("role", JSON.stringify(resJson.isAdmin ? 1 : 0))
   
     return resJson;
+  }
+
+  getTokenLH(){
+    return localStorage.getItem("authToken")
   }
   
   async signUp(signUpData: SignUp)
