@@ -12,7 +12,7 @@ export class DataAuthService {
     const token = this.getTokenLH();
     if (token){
       this.usuario = {
-        username: this.usuario?.username!,
+        username: localStorage.getItem("username")!,
         token: token,
         isAdmin: Number(localStorage.getItem("role")) 
       }
@@ -44,6 +44,7 @@ export class DataAuthService {
 
     localStorage.setItem("authToken", resJson.token)
     localStorage.setItem("role", JSON.stringify(resJson.isAdmin ? 1 : 0))
+    localStorage.setItem("username", resJson.username)
   
     return resJson;
   }
