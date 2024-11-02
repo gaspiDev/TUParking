@@ -13,10 +13,10 @@
                   <div class="tooltip" [ngClass]="{'isTooltipVisible': visibleTooltipIndex === spot.id}">
                     <button >
                         <div>
-                          @if (spot.deshabilitada == 0)
+                          @if (spot.deshabilitada == 0 && !spot.estacionamiento)
                           {
                             <button (click)="disableSpot(spot.id)"><img src="./images/disabled.svg" alt="Enable"></button>
-                          } @else {
+                          } @else if(spot.deshabilitada) {
                             <button (click)="enableSpot(spot.id)"><img src="./images/available.svg" alt="Enable"></button>
                           }
                         </div>

@@ -147,10 +147,10 @@ export class ModalsServicesService {
     }
   }
 
-  closeParkingModal(price: number | undefined){
+  closeParkingModal(price: number){
     Swal.fire({
     title: "Parking Cashed",
-    text: `The total price is $${price?.toPrecision(6)}`,
+    text: `The total price is $${Math.round((price*100)/100)}`,
     background: '#1c2833',
     color: '#f2f2f2',
     confirmButtonText: 'Cashed',

@@ -72,7 +72,7 @@ export class ParkingStateComponent {
     await this.parkingServices.closeParking(closeParking);
     await this.parkingServices.loadData();
     const price: number | undefined = this.parkingServices.parkings.find(parking => parking.patente === patente)?.costo;
-    this.modalServices.closeParkingModal(price);
+    if(price)   this.modalServices.closeParkingModal(price);
   }
 
   visibleTooltipIndex: number | null = null;

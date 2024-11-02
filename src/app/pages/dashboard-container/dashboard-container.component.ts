@@ -28,6 +28,7 @@ export class DashboardContainerComponent {
   closeSession(){
     localStorage.removeItem("authToken");
     localStorage.removeItem("role");
+    localStorage.removeItem("username");
     this.dataAuthService.usuario = undefined;
     this.router.navigate(['landing']);
   }
